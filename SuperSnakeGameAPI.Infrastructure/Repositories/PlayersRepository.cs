@@ -15,16 +15,6 @@ namespace SuperSnakeGameAPI.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Player>> GetAllPlayersAsync()
-        {
-            return await _dbContext.Players.ToListAsync();
-        }
-
-        public async Task<Player?> GetPlayerByEmailAsync(string email)
-        {
-            return await _dbContext.Players.FirstOrDefaultAsync(p => p.Email == email);
-        }
-
         public async Task<Player> AddPlayerAsync(Player player)
         {
             _dbContext.Players.Add(player);
@@ -58,6 +48,16 @@ namespace SuperSnakeGameAPI.Infrastructure.Repositories
             int changes = await _dbContext.SaveChangesAsync();
 
             return changes > 0;
+        }
+
+        public async Task<List<Player>> GetAllPlayersAsync()
+        {
+            return await _dbContext.Players.ToListAsync();
+        }
+
+        public async Task<Player?> GetPlayerByEmailAsync(string email)
+        {
+            return await _dbContext.Players.FirstOrDefaultAsync(p => p.Email == email);
         }
     }
 }

@@ -1,8 +1,16 @@
-﻿namespace SuperSnakeGameAPI.Core.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SuperSnakeGameAPI.Core.DTO
 {
     public class LoginDTO
     {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        [Required]
+        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
+        public string? Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string? Password { get; set; }
     }
 }

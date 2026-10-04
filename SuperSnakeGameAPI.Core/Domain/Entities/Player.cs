@@ -11,12 +11,17 @@ namespace SuperSnakeGameAPI.Core.Domain.Entities
         public Guid ID { get; set; }
 
         [StringLength(40)]
-        public string Name { get; set; } = string.Empty;
+        public string? Name { get; set; }
 
         [EmailAddress]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; }
 
         [Range(0, int.MaxValue)]
-        public int Highscore { get; set; } = 0;
+        public int? Highscore { get; set; }
+
+        public override string ToString()
+        {
+            return $"Player [ID={ID}, Name={Name}, Email={Email}, Highscore={Highscore}]";
+        }
     }
 }

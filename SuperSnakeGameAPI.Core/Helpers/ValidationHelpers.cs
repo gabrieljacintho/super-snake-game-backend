@@ -8,8 +8,7 @@ namespace SuperSnakeGameAPI.Core.Helpers
         /// Tries to validate the specified object and throws a ValidationException if validation fails.
         /// </summary>
         /// <param name="obj">The object to validate.</param>
-        /// <returns>True if the object is valid; otherwise, false.</returns>
-        public static bool TryValidateObject(object obj)
+        public static void ModelValidation(object obj)
         {
             ValidationContext validationContext = new ValidationContext(obj);
             List<ValidationResult> validationResults = new List<ValidationResult>();
@@ -20,8 +19,6 @@ namespace SuperSnakeGameAPI.Core.Helpers
             {
                 throw new ValidationException(string.Join(", ", validationResults.Select(vr => vr.ErrorMessage)));
             }
-
-            return isValid;
         }
     }
 }

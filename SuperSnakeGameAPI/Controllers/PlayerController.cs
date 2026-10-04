@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SuperSnakeGameAPI.Core.DTO;
 using SuperSnakeGameAPI.Infrastructure.DbContext;
 
 namespace SuperSnakeGameAPI.Controllers
@@ -17,13 +18,12 @@ namespace SuperSnakeGameAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(PlayerAddRequest playerAddRequest)
         {
-
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
         }
 
