@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using SuperSnakeGameAPI.Core.Domain.Entities;
 using SuperSnakeGameAPI.Core.Domain.RepositoryContracts;
 using SuperSnakeGameAPI.Infrastructure.DbContext;
@@ -10,7 +9,7 @@ namespace SuperSnakeGameAPI.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public PlayersRepository(ApplicationDbContext dbContext, ILogger<PlayersRepository> logger)
+        public PlayersRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -26,14 +25,13 @@ namespace SuperSnakeGameAPI.Infrastructure.Repositories
 
         public async Task<Player> UpdatePlayerAsync(Player player)
         {
-            Player? existingPlayer = await _dbContext.Players.FirstOrDefaultAsync(p => p.Email == player.Email);
+            Player? existingPlayer = await _dbContext.Players.FirstOrDefaultAsync(p => p.Id == player.Id);
 
             if (existingPlayer == null)
             {
                 return player;
             }
 
-            existingPlayer.UserName = player.UserName;
             existingPlayer.Highscore = player.Highscore;
 
             await _dbContext.SaveChangesAsync();
@@ -41,9 +39,9 @@ namespace SuperSnakeGameAPI.Infrastructure.Repositories
             return existingPlayer;
         }
 
-        public async Task<bool> DeletePlayerByIDAsync(Guid id)
+        public async Task<bool> DeletePlayerByIdAsync(Guid id)
         {
-            _dbContext.Players.RemoveRange(_dbContext.Players.Where(p => p.Email == email));
+            _dbContext.Players.RemoveRange(_dbContext.Players.Where(p => p.Id == id));
 
             int changes = await _dbContext.SaveChangesAsync();
 
@@ -55,9 +53,9 @@ namespace SuperSnakeGameAPI.Infrastructure.Repositories
             return await _dbContext.Players.ToListAsync();
         }
 
-        public async Task<Player?> GetPlayerByEmailAsync(string email)
+        public async Task<Player?> GetPlayerByIdAsync(Guid id)
         {
-            return await _dbContext.Players.FirstOrDefaultAsync(p => p.Email == email);
+            return await _dbContext.Players.FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

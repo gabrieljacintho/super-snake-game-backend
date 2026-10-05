@@ -8,20 +8,14 @@ namespace SuperSnakeGameAPI.Core.Domain.Entities
     public class Player
     {
         [Key]
-        public Guid ID { get; set; }
-
-        [StringLength(40)]
-        public string? Name { get; set; }
-
-        [EmailAddress]
-        public string? Email { get; set; }
+        public Guid Id { get; set; }
 
         [Range(0, int.MaxValue)]
-        public int? Highscore { get; set; }
+        public int Highscore { get; set; }
 
         public override string ToString()
         {
-            return $"Player [ID={ID}, Name={Name}, Email={Email}, Highscore={Highscore}]";
+            return $"Player Id: {Id}, Highscore: {Highscore}";
         }
     }
 }

@@ -3,26 +3,22 @@
 namespace SuperSnakeGameAPI.Core.DTO
 {
     /// <summary>
-    /// Represents a Data Transfer Object (DTO) for player responses, encapsulating player information such as ID, Name, Email, and Highscore.
+    /// Represents a Data Transfer Object (DTO) for player responses, encapsulating player information such as Id and Highscore.
     /// </summary>
     public class PlayerResponse
     {
-        public Guid ID { get; set; }
-        public string? Name { get; set; }
-        public string? Email { get; set; }
-        public int? Highscore { get; set; }
+        public Guid Id { get; set; }
+        public int Highscore { get; set; }
 
         /// <summary>
-        /// Compares the current PlayerResponse instance with another object for equality based on the values of ID, Name, Email, and Highscore.
+        /// Compares the current PlayerResponse instance with another object for equality based on the values of Id and Highscore.
         /// </summary>
         /// <param name="obj">The object to compare with the current PlayerResponse instance.</param>
         /// <returns>True if the specified object is equal to the current PlayerResponse instance; otherwise, false.</returns>
         public override bool Equals(object? obj)
         {
             return obj is PlayerResponse other
-                && ID == other.ID
-                && Name == other.Name
-                && Email == other.Email
+                && Id == other.Id
                 && Highscore == other.Highscore;
         }
 
@@ -33,18 +29,7 @@ namespace SuperSnakeGameAPI.Core.DTO
 
         public override string ToString()
         {
-            return $"PlayerResponse {{ ID = {ID}, Name = {Name}, Email = {Email}, Highscore = {Highscore} }}";
-        }
-
-        public PlayerUpdateRequest ToPlayerUpdateRequest()
-        {
-            return new PlayerUpdateRequest
-            {
-                ID = this.ID,
-                Name = this.Name,
-                Email = this.Email,
-                Highscore = this.Highscore
-            };
+            return $"PlayerResponse: Id={Id}, Highscore={Highscore}";
         }
     }
 
@@ -59,9 +44,7 @@ namespace SuperSnakeGameAPI.Core.DTO
         {
             return new PlayerResponse
             {
-                ID = player.ID,
-                Name = player.Name,
-                Email = player.Email,
+                Id = player.Id,
                 Highscore = player.Highscore
             };
         }

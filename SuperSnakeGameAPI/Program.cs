@@ -1,19 +1,28 @@
-using SuperSnakeGameAPI.Core.Domain.RepositoryContracts;
-using SuperSnakeGameAPI.Infrastructure.Repositories;
+using SuperSnakeGameAPI.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddScoped<IPlayersRepository, PlayersRepository>();
-builder.Services.AddControllers();
+builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+if (builder.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
 
+app.UseHttpsRedirection();
+app.UseHttpLogging();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

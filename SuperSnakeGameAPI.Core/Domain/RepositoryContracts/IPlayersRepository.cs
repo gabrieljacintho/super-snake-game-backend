@@ -27,7 +27,7 @@ namespace SuperSnakeGameAPI.Core.Domain.RepositoryContracts
         /// <param name="id">The unique identifier of the player to delete.</param>
         /// <returns>A task that represents the asynchronous operation. The task result is <see langword="true"/> if the player
         /// was successfully deleted; otherwise, <see langword="false"/>.</returns>
-        Task<bool> DeletePlayerByIDAsync(Guid id);
+        Task<bool> DeletePlayerByIdAsync(Guid id);
 
         /// <summary>
         /// Gets a list of all players asynchronously.
@@ -36,10 +36,10 @@ namespace SuperSnakeGameAPI.Core.Domain.RepositoryContracts
         Task<List<Player>> GetAllPlayersAsync();
 
         /// <summary>
-        /// Gets a player by their email asynchronously.
+        /// Gets a player by their unique identifier asynchronously.
         /// </summary>
-        /// <param name="email">The email of the player to retrieve.</param>
-        /// <returns>A task that represents the asynchronous operation. The task result contains the player with the specified email, or null if not found.</returns>
-        Task<Player?> GetPlayerByEmailAsync(string email);
+        /// <param name="id">The unique identifier of the player to retrieve.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the player with the specified Id, or null if not found.</returns>
+        Task<Player?> GetPlayerByIdAsync(Guid id);
     }
 }
