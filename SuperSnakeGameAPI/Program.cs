@@ -17,9 +17,9 @@ else
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
+    app.UseHttpsRedirection();
 }
 
-app.UseHttpsRedirection();
 app.UseHttpLogging();
 
 app.UseSwagger();
