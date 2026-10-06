@@ -40,7 +40,6 @@ namespace SuperSnakeGameAPI.Web.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("Default"));
             });
 
-            services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo()
