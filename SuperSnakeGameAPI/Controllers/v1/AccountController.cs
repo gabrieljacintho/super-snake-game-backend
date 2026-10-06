@@ -27,16 +27,16 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Register(RegisterDTO registerDTO)
+        public async Task<IActionResult> Register(RegisterRequest registerRequest)
         {
             ApplicationUser user = new ApplicationUser
             {
-                UserName = registerDTO.Email,
-                Email = registerDTO.Email,
-                Name = registerDTO.Name
+                UserName = registerRequest.Email,
+                Email = registerRequest.Email,
+                Name = registerRequest.Name
             };
 
-            IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, registerRequest.Password);
 
             if (!result.Succeeded)
             {
@@ -64,11 +64,11 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
-            ApplicationUser? user = await _userManager.FindByEmailAsync(loginDTO.Email);
+            ApplicationUser? user = await _userManager.FindByEmailAsync(loginRequest.Email);
 
-            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginRequest.Password))
             {
                 return Unauthorized("Invalid email or password.");
             }

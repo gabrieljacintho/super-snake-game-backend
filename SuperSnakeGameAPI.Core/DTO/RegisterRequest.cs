@@ -2,7 +2,7 @@
 
 namespace SuperSnakeGameAPI.Core.DTO
 {
-    public class RegisterDTO
+    public class RegisterRequest
     {
         [Required]
         public string Name { get; set; } = string.Empty;

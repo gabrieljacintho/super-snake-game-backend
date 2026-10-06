@@ -2,7 +2,7 @@
 
 namespace SuperSnakeGameAPI.Core.DTO
 {
-    public class LoginDTO
+    public class LoginRequest
     {
         [Required]
         [EmailAddress]
