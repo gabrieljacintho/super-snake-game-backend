@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using SuperSnakeGameAPI.Core.Domain.IdentityEntities;
 using SuperSnakeGameAPI.Core.Domain.RepositoryContracts;
 using SuperSnakeGameAPI.Core.Helpers;
@@ -22,9 +24,30 @@ namespace SuperSnakeGameAPI.Web.Extensions
             services.AddScoped<IPlayersService, PlayersService>();
             services.AddTransient<IJwtService, JwtService>();
 
+            services.AddApiVersioning(config =>
+            {
+                config.ApiVersionReader = new UrlSegmentApiVersionReader();
+                config.DefaultApiVersion = new ApiVersion(1, 0);
+                config.AssumeDefaultVersionWhenUnspecified = true;
+            }).AddApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("Default"));
+            });
+
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "Super Snake Game API",
+                    Version = "1.0"
+                });
             });
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>

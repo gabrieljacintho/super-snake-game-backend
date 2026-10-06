@@ -22,6 +22,12 @@ else
 app.UseHttpsRedirection();
 app.UseHttpLogging();
 
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "1.0");
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 

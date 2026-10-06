@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SuperSnakeGameAPI.Core.ServiceContracts;
 using System.Security.Claims;
 
-namespace SuperSnakeGameAPI.Web.Controllers
+namespace SuperSnakeGameAPI.Web.Controllers.v1
 {
+    [ApiVersion("1.0")]
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]

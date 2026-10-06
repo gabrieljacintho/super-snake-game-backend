@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SuperSnakeGameAPI.Core.Domain.IdentityEntities;
@@ -7,8 +8,9 @@ using SuperSnakeGameAPI.Core.Enums;
 using SuperSnakeGameAPI.Core.ServiceContracts;
 using System.Security.Claims;
 
-namespace SuperSnakeGameAPI.Web.Controllers
+namespace SuperSnakeGameAPI.Web.Controllers.v1
 {
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
