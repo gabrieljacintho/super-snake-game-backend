@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SuperSnakeGameAPI.Core.Domain.IdentityEntities;
-using SuperSnakeGameAPI.Core.DTO;
+using SuperSnakeGameAPI.Core.DTOs;
 using SuperSnakeGameAPI.Core.Enums;
 using SuperSnakeGameAPI.Core.ServiceContracts;
 using System.Security.Claims;

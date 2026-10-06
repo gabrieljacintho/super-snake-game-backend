@@ -1,6 +1,6 @@
 ﻿using SuperSnakeGameAPI.Core.Domain.Entities;
 
-namespace SuperSnakeGameAPI.Core.DTO
+namespace SuperSnakeGameAPI.Core.DTOs
 {
     /// <summary>
     /// Represents a Data Transfer Object (DTO) for player responses, encapsulating player information such as Id and Highscore.

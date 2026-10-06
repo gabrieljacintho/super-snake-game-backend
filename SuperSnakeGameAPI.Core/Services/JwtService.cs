@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SuperSnakeGameAPI.Core.Domain.IdentityEntities;
-using SuperSnakeGameAPI.Core.DTO;
+using SuperSnakeGameAPI.Core.DTOs;
 using SuperSnakeGameAPI.Core.Helpers;
 using SuperSnakeGameAPI.Core.ServiceContracts;
 using System.IdentityModel.Tokens.Jwt;

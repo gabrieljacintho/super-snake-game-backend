@@ -1,5 +1,5 @@
 ﻿using SuperSnakeGameAPI.Core.Domain.IdentityEntities;
-using SuperSnakeGameAPI.Core.DTO;
+using SuperSnakeGameAPI.Core.DTOs;
 using System.Security.Claims;
 
 namespace SuperSnakeGameAPI.Core.ServiceContracts

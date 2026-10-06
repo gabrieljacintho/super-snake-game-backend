@@ -1,4 +1,4 @@
-﻿namespace SuperSnakeGameAPI.Core.DTO
+﻿namespace SuperSnakeGameAPI.Core.DTOs
 {
     public class AuthenticationResponse
     {

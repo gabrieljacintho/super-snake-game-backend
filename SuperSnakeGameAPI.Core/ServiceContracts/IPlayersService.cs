@@ -1,4 +1,4 @@
-﻿using SuperSnakeGameAPI.Core.DTO;
+﻿using SuperSnakeGameAPI.Core.DTOs;
 
 namespace SuperSnakeGameAPI.Core.ServiceContracts
 {

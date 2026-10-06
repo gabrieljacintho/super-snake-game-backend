@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperSnakeGameAPI.Core.DTO
+namespace SuperSnakeGameAPI.Core.DTOs
 {
     public class LoginRequest
     {

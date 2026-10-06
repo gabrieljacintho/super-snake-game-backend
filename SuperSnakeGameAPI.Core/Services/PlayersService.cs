@@ -1,6 +1,6 @@
 ﻿using SuperSnakeGameAPI.Core.Domain.Entities;
 using SuperSnakeGameAPI.Core.Domain.RepositoryContracts;
-using SuperSnakeGameAPI.Core.DTO;
+using SuperSnakeGameAPI.Core.DTOs;
 using SuperSnakeGameAPI.Core.ServiceContracts;
 
 namespace SuperSnakeGameAPI.Core.Services
