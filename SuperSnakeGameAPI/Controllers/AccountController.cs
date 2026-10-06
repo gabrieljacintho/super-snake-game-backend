@@ -106,7 +106,7 @@ namespace SuperSnakeGameAPI.Web.Controllers
             return NoContent();
         }
         
-        [HttpGet("[action]")]
+        [HttpGet("is-email-already-registered")]
         public async Task<IActionResult> IsEmailAlreadyRegistered(string email)
         {
             ApplicationUser? user = await _userManager.FindByEmailAsync(email);
@@ -114,7 +114,7 @@ namespace SuperSnakeGameAPI.Web.Controllers
             return Ok(user != null);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshToken(TokenModel tokenModel)
         {
             if (string.IsNullOrEmpty(tokenModel.Token) || string.IsNullOrEmpty(tokenModel.RefreshToken))

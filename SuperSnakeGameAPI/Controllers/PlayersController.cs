@@ -17,7 +17,7 @@ namespace SuperSnakeGameAPI.Web.Controllers
             _playersService = playersService;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("highscore")]
         public async Task<IActionResult> GetHighscore()
         {
             if (!TryGetUserId(out Guid userId))
@@ -28,7 +28,7 @@ namespace SuperSnakeGameAPI.Web.Controllers
             return Ok(await _playersService.GetOrCreatePlayerAsync(userId));
         }
 
-        [HttpPut("[action]")]
+        [HttpPut("highscore")]
         public async Task<IActionResult> UpdateHighscore([FromBody] int newHighscore)
         {
             if (!TryGetUserId(out Guid userId))
