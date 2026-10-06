@@ -1,5 +1,4 @@
-﻿using SuperSnakeGameAPI.Core.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SuperSnakeGameAPI.Core.DTO
 {
@@ -10,7 +9,6 @@ namespace SuperSnakeGameAPI.Core.DTO
 
         [Required]
         [EmailAddress]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
 
         [Required]
@@ -19,7 +17,7 @@ namespace SuperSnakeGameAPI.Core.DTO
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Passwords do not match.")]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

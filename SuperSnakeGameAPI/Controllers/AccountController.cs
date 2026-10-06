@@ -5,7 +5,6 @@ using SuperSnakeGameAPI.Core.Domain.IdentityEntities;
 using SuperSnakeGameAPI.Core.DTO;
 using SuperSnakeGameAPI.Core.Enums;
 using SuperSnakeGameAPI.Core.ServiceContracts;
-using SuperSnakeGameAPI.Web.Extensions;
 using System.Security.Claims;
 
 namespace SuperSnakeGameAPI.Web.Controllers
@@ -28,11 +27,6 @@ namespace SuperSnakeGameAPI.Web.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(this.GetModelStateErrorMessage());
-            }
-
             ApplicationUser user = new ApplicationUser
             {
                 UserName = registerDTO.Email,
@@ -70,11 +64,6 @@ namespace SuperSnakeGameAPI.Web.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(this.GetModelStateErrorMessage());
-            }
-
             ApplicationUser? user = await _userManager.FindByEmailAsync(loginDTO.Email);
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))

@@ -6,7 +6,6 @@ namespace SuperSnakeGameAPI.Core.DTO
     {
         [Required]
         [EmailAddress]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
 
         [Required]
