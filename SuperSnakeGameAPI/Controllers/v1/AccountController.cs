@@ -46,25 +46,13 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
                 return BadRequest(errorMessage);
             }
 
-            await AddToRoleAsync(user, UserTypeOptions.User);
+            await _userManager.AddToRoleAsync(user, UserTypeOptions.User.ToString());
 
             await _playersService.GetOrCreatePlayerAsync(user.Id);
 
             AuthenticationResponse authenticationResponse = await RefreshToken(user);
 
             return Ok(authenticationResponse);
-        }
-
-        private async Task<IdentityResult> AddToRoleAsync(ApplicationUser user, UserTypeOptions userType)
-        {
-            string roleName = userType.ToString();
-
-            if (!await _roleManager.RoleExistsAsync(roleName))
-            {
-                await _roleManager.CreateAsync(new ApplicationRole { Name = roleName });
-            }
-
-            return await _userManager.AddToRoleAsync(user, roleName);
         }
 
         [HttpPost("[action]")]
