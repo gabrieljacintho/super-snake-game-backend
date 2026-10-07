@@ -3,7 +3,7 @@
 namespace SuperSnakeGameAPI.Core.Domain.Entities
 {
     /// <summary>
-    /// Player entity representing a player in the Star Race game.
+    /// Player entity representing a player in the game.
     /// </summary>
     public class Player
     {

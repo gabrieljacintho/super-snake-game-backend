@@ -20,11 +20,11 @@ namespace SuperSnakeGameAPI.Core.Services
             _configuration = configuration;
         }
 
-        public AuthenticationResponse CreateJwtToken(ApplicationUser user)
+        public AuthenticationResponse CreateJwtToken(ApplicationUser user, IEnumerable<string> roles)
         {
             DateTime expiration = GetExpirationDateTime("Jwt");
 
-            Claim[] claims = new Claim[]
+            List<Claim> claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -32,6 +32,8 @@ namespace SuperSnakeGameAPI.Core.Services
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email)
             };
+
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtHelpers.GetJwtKey(_configuration)));
 
@@ -52,6 +54,7 @@ namespace SuperSnakeGameAPI.Core.Services
             {
                 Name = user.Name,
                 Email = user.Email,
+                Roles = roles.ToList(),
                 Token = token,
                 Expiration = expiration,
                 RefreshToken = GenerateRefreshToken(),

@@ -7,6 +7,8 @@ builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 
+await app.SeedAdminAsync();
+
 // Configure the HTTP request pipeline.
 
 if (builder.Environment.IsDevelopment())

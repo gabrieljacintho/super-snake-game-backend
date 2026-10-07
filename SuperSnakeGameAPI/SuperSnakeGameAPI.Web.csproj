@@ -22,8 +22,4 @@
     <ProjectReference Include="..\SuperSnakeGameAPI.Infrastructure\SuperSnakeGameAPI.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-  </ItemGroup>
-
 </Project>

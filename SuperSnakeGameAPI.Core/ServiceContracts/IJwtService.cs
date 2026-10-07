@@ -6,7 +6,7 @@ namespace SuperSnakeGameAPI.Core.ServiceContracts
 {
     public interface IJwtService
     {
-        AuthenticationResponse CreateJwtToken(ApplicationUser user);
+        AuthenticationResponse CreateJwtToken(ApplicationUser user, IEnumerable<string> roles);
 
         ClaimsPrincipal? GetPrincipalFromJwtToken(string token);
     }

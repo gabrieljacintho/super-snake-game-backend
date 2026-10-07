@@ -18,12 +18,14 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IJwtService _jwtService;
+        private readonly IPlayersService _playersService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IJwtService jwtService)
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IJwtService jwtService, IPlayersService playersService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _jwtService = jwtService;
+            _playersService = playersService;
         }
 
         [HttpPost("[action]")]
@@ -45,6 +47,8 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
             }
 
             await AddToRoleAsync(user, UserTypeOptions.User);
+
+            await _playersService.GetOrCreatePlayerAsync(user.Id);
 
             AuthenticationResponse authenticationResponse = await RefreshToken(user);
 
@@ -136,7 +140,9 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
 
         private async Task<AuthenticationResponse> RefreshToken(ApplicationUser user)
         {
-            AuthenticationResponse authenticationResponse = _jwtService.CreateJwtToken(user);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            AuthenticationResponse authenticationResponse = _jwtService.CreateJwtToken(user, roles);
             user.RefreshToken = authenticationResponse.RefreshToken;
             user.RefreshTokenExpiration = authenticationResponse.RefreshTokenExpiration;
 

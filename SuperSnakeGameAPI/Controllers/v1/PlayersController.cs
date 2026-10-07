@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SuperSnakeGameAPI.Core.ServiceContracts;
-using System.Security.Claims;
+using SuperSnakeGameAPI.Web.Extensions;
 
 namespace SuperSnakeGameAPI.Web.Controllers.v1
 {
@@ -22,7 +22,7 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
         [HttpGet("highscore")]
         public async Task<IActionResult> GetHighscore()
         {
-            if (!TryGetUserId(out Guid userId))
+            if (!this.TryGetUserId(out Guid userId))
             {
                 return Unauthorized();
             }
@@ -33,25 +33,12 @@ namespace SuperSnakeGameAPI.Web.Controllers.v1
         [HttpPut("highscore")]
         public async Task<IActionResult> UpdateHighscore([FromBody] int newHighscore)
         {
-            if (!TryGetUserId(out Guid userId))
+            if (!this.TryGetUserId(out Guid userId))
             {
                 return Unauthorized();
             }
 
             return Ok(await _playersService.UpdateHighscoreAsync(userId, newHighscore));
-        }
-
-        private bool TryGetUserId(out Guid userId)
-        {
-            string? userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (string.IsNullOrEmpty(userIdString) || !Guid.TryParse(userIdString, out userId))
-            {
-                userId = Guid.Empty;
-                return false;
-            }
-
-            return true;
         }
     }
 }
